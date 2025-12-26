@@ -298,4 +298,77 @@ class EmailSender:
         except Exception as e:
             print(f"Error creating CSV attachment: {e}")
             return None
+    
+    def send_no_jobs_email(self):
+        """
+        Send an email notification when no new jobs were found.
+        This confirms the scraper ran successfully.
+        
+        Returns:
+            bool: True if email sent successfully, False otherwise
+        """
+        if not all([self.user, self.password, self.to_email]):
+            print("Email configuration incomplete. Cannot send 'no jobs' notification.")
+            return False
+        
+        try:
+            # Create message
+            msg = MIMEMultipart('alternative')
+            today = datetime.now().strftime('%Y-%m-%d')
+            msg['Subject'] = f"Job Scraper Update - No New Jobs on {today}"
+            msg['From'] = self.user
+            msg['To'] = self.to_email
+            
+            # Create email body
+            html_body = f"""
+            <html>
+            <head></head>
+            <body>
+                <h2>Job Scraper Daily Update</h2>
+                <p>The job scraper ran successfully on <strong>{today}</strong>.</p>
+                <p><strong>No new jobs</strong> were found today.</p>
+                <p>This means:</p>
+                <ul>
+                    <li>The scraper ran successfully</li>
+                    <li>All existing jobs in the database were checked</li>
+                    <li>No new job postings were discovered</li>
+                </ul>
+                <p>You'll receive another email when new jobs are found.</p>
+            </body>
+            </html>
+            """
+            
+            text_body = f"""
+Job Scraper Daily Update
+
+The job scraper ran successfully on {today}.
+
+No new jobs were found today.
+
+This means:
+- The scraper ran successfully
+- All existing jobs in the database were checked
+- No new job postings were discovered
+
+You'll receive another email when new jobs are found.
+            """
+            
+            # Attach parts
+            part1 = MIMEText(text_body, 'plain')
+            part2 = MIMEText(html_body, 'html')
+            msg.attach(part1)
+            msg.attach(part2)
+            
+            # Send email
+            with smtplib.SMTP(self.host, self.port) as server:
+                server.starttls()
+                server.login(self.user, self.password)
+                server.send_message(msg)
+            
+            print("Sent 'no new jobs' notification email")
+            return True
+            
+        except Exception as e:
+            print(f"Error sending 'no jobs' email: {e}")
+            return False
 
