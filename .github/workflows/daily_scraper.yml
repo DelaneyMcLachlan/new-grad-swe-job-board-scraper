@@ -29,13 +29,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     
-    - name: Restore database from cache
-      id: cache-db
-      uses: actions/cache@v4
-      with:
-        path: jobs.db
-        key: jobs-database-v1
-    
     - name: Run job scraper
       env:
         EMAIL_USER: ${{ secrets.EMAIL_USER }}
@@ -44,12 +37,14 @@ jobs:
       run: |
         python main.py
     
-    - name: Save database to cache
+    - name: Commit and push database updates
       if: always()
-      uses: actions/cache@v4
-      with:
-        path: jobs.db
-        key: jobs-database-v1
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add jobs.db
+        git diff --staged --quiet || git commit -m "Update jobs database [skip ci]"
+        git push
     
     - name: Upload database (optional - for backup)
       if: always()

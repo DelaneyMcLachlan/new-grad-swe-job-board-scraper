@@ -29,10 +29,11 @@ share/python-wheels/
 MANIFEST
 
 # Database
-*.db
+# Note: jobs.db is committed to git for GitHub Actions persistence
 *.sqlite
 *.sqlite3
-jobs.db
+# Allow jobs.db to be committed
+!jobs.db
 
 # Environment variables
 .env
