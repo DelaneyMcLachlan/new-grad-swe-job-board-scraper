@@ -34,9 +34,7 @@ jobs:
       uses: actions/cache@v4
       with:
         path: jobs.db
-        key: jobs-database-${{ runner.os }}
-        restore-keys: |
-          jobs-database-${{ runner.os }}
+        key: jobs-database-v1
     
     - name: Run job scraper
       env:
@@ -51,9 +49,7 @@ jobs:
       uses: actions/cache@v4
       with:
         path: jobs.db
-        key: jobs-database-${{ runner.os }}-${{ github.run_id }}
-        restore-keys: |
-          jobs-database-${{ runner.os }}
+        key: jobs-database-v1
     
     - name: Upload database (optional - for backup)
       if: always()
