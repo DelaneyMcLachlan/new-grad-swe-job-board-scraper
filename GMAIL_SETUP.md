@@ -26,24 +26,29 @@ Create a file named `.env` in your project root with the following content:
 ```
 EMAIL_HOST=smtp.gmail.com
 EMAIL_PORT=587
-EMAIL_USER=dmjobboardscraper@gmail.com
+EMAIL_USER=your_email@gmail.com
 EMAIL_PASSWORD=your_16_character_app_password_here
 EMAIL_TO=your_personal_email@gmail.com
 ```
 
 **Replace:**
+- `your_email@gmail.com` with your Gmail address
 - `your_16_character_app_password_here` with the App Password from Step 2 (remove spaces)
 - `your_personal_email@gmail.com` with your personal email where you want to receive job notifications
 
 ## Example .env File
 
+**Note:** This is just an example - use your own credentials!
+
 ```
 EMAIL_HOST=smtp.gmail.com
 EMAIL_PORT=587
-EMAIL_USER=dmjobboardscraper@gmail.com
-EMAIL_PASSWORD=abcdefghijklmnop
-EMAIL_TO=yourname@gmail.com
+EMAIL_USER=your_email@gmail.com
+EMAIL_PASSWORD=xxxx xxxx xxxx xxxx
+EMAIL_TO=recipient@gmail.com
 ```
+
+**Important:** Replace all placeholder values with your actual credentials!
 
 ## Step 4: Test Your Email Setup
 
