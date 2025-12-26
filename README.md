@@ -1,5 +1,9 @@
 # Job Board Scraper
 
+![Email Notification Example](job_board_scraper_email.png)
+
+*Example email notification showing new job listings from multiple job boards*
+
 A web scraper for multiple software engineering job boards that collects job listings, stores them in a database, and sends daily email notifications of new jobs.
 
 ## Features
