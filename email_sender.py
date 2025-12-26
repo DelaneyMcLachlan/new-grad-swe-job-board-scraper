@@ -35,7 +35,7 @@ class EmailSender:
             bool: True if email sent successfully, False otherwise
         """
         if not jobs:
-            print("No new jobs to email")
+            # Don't send empty email here - let send_no_jobs_email handle it
             return True
         
         if not all([self.user, self.password, self.to_email]):

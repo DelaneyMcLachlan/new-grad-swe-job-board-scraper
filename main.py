@@ -179,6 +179,9 @@ def send_daily_email():
             print("  They will be included in the next email attempt")
     else:
         print("No new jobs to email (no jobs were added to database today)")
+        # Send a notification email even when there are no new jobs
+        # This confirms the scraper ran successfully
+        email_sender.send_no_jobs_email()
     
     db.close()
 
