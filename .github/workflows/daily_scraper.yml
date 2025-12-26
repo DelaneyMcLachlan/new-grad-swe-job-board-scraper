@@ -29,6 +29,15 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     
+    - name: Restore database from cache
+      id: cache-db
+      uses: actions/cache@v4
+      with:
+        path: jobs.db
+        key: jobs-database-${{ runner.os }}
+        restore-keys: |
+          jobs-database-${{ runner.os }}
+    
     - name: Run job scraper
       env:
         EMAIL_USER: ${{ secrets.EMAIL_USER }}
@@ -36,6 +45,15 @@ jobs:
         EMAIL_TO: ${{ secrets.EMAIL_TO }}
       run: |
         python main.py
+    
+    - name: Save database to cache
+      if: always()
+      uses: actions/cache@v4
+      with:
+        path: jobs.db
+        key: jobs-database-${{ runner.os }}-${{ github.run_id }}
+        restore-keys: |
+          jobs-database-${{ runner.os }}
     
     - name: Upload database (optional - for backup)
       if: always()
