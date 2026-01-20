@@ -101,12 +101,13 @@ def scrape_all_boards():
             locations = config.JOB_BOARD_LOCATIONS.get(board_name)
             
             # Scrape all jobs (no date filtering - database handles duplicates)
+            # Pass database to scraper so it can stop early at first duplicate (for TI scraper)
             if locations:
                 # Pass locations to scraper if it supports it
-                jobs = scraper.scrape_jobs(locations=locations, filter_today_only=False)
+                jobs = scraper.scrape_jobs(locations=locations, filter_today_only=False, db=db)
             else:
                 # Scrape all jobs
-                jobs = scraper.scrape_jobs(filter_today_only=False)
+                jobs = scraper.scrape_jobs(filter_today_only=False, db=db)
             
             print(f"  Found {len(jobs)} total jobs")
             

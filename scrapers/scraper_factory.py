@@ -7,6 +7,7 @@ from .amd_scraper import AMDScraper
 from .synopsys_scraper import SynopsysScraper
 from .meta_scraper import MetaScraper
 from .google_scraper import GoogleScraper
+from .ti_scraper import TIScraper
 # Import other scrapers here as you create them
 # from .indeed_scraper import IndeedScraper
 # from .linkedin_scraper import LinkedInScraper
@@ -24,6 +25,8 @@ class ScraperFactory:
         'synopsys': SynopsysScraper,  # Synopsys careers scraper
         'meta': MetaScraper,         # Meta careers scraper
         'google': GoogleScraper,     # Google careers scraper
+        'ti': TIScraper,             # Texas Instruments careers scraper
+        'texas_instruments': TIScraper,  # Alternative name
         # Add mappings here as you create new scrapers
         # 'indeed': IndeedScraper,
         # 'linkedin': LinkedInScraper,
@@ -56,6 +59,9 @@ class ScraperFactory:
         
         if 'google.com/about/careers' in url_lower or 'google.com/careers' in url_lower:
             return 'google'
+        
+        if 'careers.ti.com' in url_lower or 'ti.com' in url_lower:
+            return 'ti'
         
         return None
     

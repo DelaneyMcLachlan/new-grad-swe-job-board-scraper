@@ -25,6 +25,7 @@ JOB_BOARDS = {
     "amd": "https://careers.amd.com/careers-home/jobs?country=United%20States%7CCanada&page=1&sortBy=posted_date&descending=true",
     "synopsys": "https://careers.synopsys.com/category/engineering-jobs/44408/8675488/1",  # Engineering jobs
     "meta": "https://www.metacareers.com/jobsearch?roles[0]=Full%20time%20employment&sort_by_new=true&offices[0]=North%20America",
+    "ti": "https://careers.ti.com/en/sites/CX/jobs?sortBy=POSTING_DATES_DESC",  # Texas Instruments
     # Example: "indeed": "https://www.indeed.com/jobs?q=software+engineer&l=",
     # Add your job board URLs here
     # For Workday job boards, use "workday" or company name as key

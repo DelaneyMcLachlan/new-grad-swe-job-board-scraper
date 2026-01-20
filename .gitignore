@@ -73,3 +73,5 @@ geckodriver*
 *.bak
 *.cache
 
+# Local-only files
+add_employers.txt
